@@ -66,6 +66,9 @@ module.exports = {
       blur: {
         full: '194px',
       },
+      animation: {
+        'ping-slow': 'ping 20s infinite',
+      },
     },
   },
 
