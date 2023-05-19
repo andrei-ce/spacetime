@@ -1,18 +1,26 @@
 import fastify from 'fastify'
-import { PrismaClient } from '@prisma/client'
+import cors from '@fastify/cors'
+import { memoriesRoutes } from './routes/memories'
+import { usersRoutes } from './routes/users'
 
-const app = fastify()
-const prisma = new PrismaClient()
+const app = fastify({ logger: false })
 
-app.get('/', (rews, res) => {
-  res.send({ hello: 'world' })
+app.get('/ping', async (req, res) => {
+  return { pong: 'it worked!' }
 })
-
-app.get('/users', async (req, res) => {
-  const users = await prisma.user.findMany()
-  return users
+app.register(cors, {
+  origin: true, // all FE urls can access the BE
+  // origin:['http://localhost:3000', 'http://mydomain...']
 })
+app.register(memoriesRoutes, usersRoutes)
 
-app.listen({ port: 3333 }).then(() => {
-  console.log('HTTP server up and running 🚀')
-})
+const start = async () => {
+  try {
+    await app.listen({ port: 3333 })
+    console.log('HTTP server up and running on http://localhost:3333/ 🚀')
+  } catch (err) {
+    app.log.error(err)
+    process.exit(1)
+  }
+}
+start()
