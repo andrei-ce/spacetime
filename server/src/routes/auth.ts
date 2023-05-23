@@ -10,7 +10,7 @@ export async function authRoutes(app: FastifyInstance) {
       code: z.string(),
     })
     const { code } = bodySchema.parse(req.body)
-
+    console.log('hi')
     // use code generated on FE + BE keys to get access token from github
     const accessTokenResponse = await axios.post(
       'https://github.com/login/oauth/access_token',
@@ -28,7 +28,7 @@ export async function authRoutes(app: FastifyInstance) {
     )
     // this expires in less than 1 day, so we need to authenticate it via JWT later
     const { access_token } = accessTokenResponse.data
-
+    console.log('access token:', access_token)
     // with token in hands, get user info from github
     const userResponse = await axios.get('https://api.github.com/user', {
       headers: {
@@ -49,6 +49,8 @@ export async function authRoutes(app: FastifyInstance) {
     let user = await prisma.user.findUnique({
       where: { gitHubId: userInfo.id },
     })
+    console.log('user exists:', user)
+
     // if not, create one
     if (!user) {
       user = await prisma.user.create({
@@ -59,6 +61,7 @@ export async function authRoutes(app: FastifyInstance) {
           avatarUrl: userInfo.avatar_url,
         },
       })
+      console.log('user does not exist:', user)
     }
 
     // return a JWT token so the user continues to be logged in in the FE

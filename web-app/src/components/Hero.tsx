@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import nlwLogo from '../assets/nlw-logo.svg'
 import Image from 'next/image'
 
@@ -14,12 +15,12 @@ export function Hero() {
           want) with the world!
         </p>
       </div>
-      <a
+      <Link
         className="inline-block rounded-full bg-green-500 px-5 py-3 font-alt text-sm uppercase leading-none text-black hover:animate-ping-slow hover:bg-green-600"
-        href="#"
+        href="/memories/new"
       >
         Register a memory{' '}
-      </a>
+      </Link>
     </div>
   )
 }

@@ -8,7 +8,7 @@ interface User {
 }
 
 export default function getUser(): User {
-  const token = cookies().get('NWLtoken')?.value
+  const token = cookies().get('NLWtoken')?.value
 
   if (!token) {
     throw new Error('Unauthenticated')

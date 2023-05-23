@@ -7,7 +7,7 @@ import { usersRoutes } from './routes/users'
 import { authRoutes } from './routes/auth'
 import jwt from '@fastify/jwt'
 
-const app = fastify({ logger: false })
+const app = fastify({ logger: true })
 
 app.get('/ping', async (req, res) => {
   return { pong: 'it worked!' }
