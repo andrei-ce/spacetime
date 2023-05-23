@@ -6,20 +6,70 @@ import {
   Roboto_700Bold,
 } from '@expo-google-fonts/roboto'
 import { BaiJamjuree_700Bold } from '@expo-google-fonts/bai-jamjuree'
-import blurBg from './src/assets/bg-blug.png'
-import Stripes from './src/assets/stripes.svg'
-import NlwLogo from './src/assets/nlw-logo.svg'
+import * as SecureStore from 'expo-secure-store'
 import { styled } from 'nativewind'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { makeRedirectUri, useAuthRequest } from 'expo-auth-session'
+import { useRouter } from 'expo-router'
+
+import { api } from '../src/lib/api'
+import blurBg from '../src/assets/bg-blug.png'
+import Stripes from '../src/assets/stripes.svg'
+import NlwLogo from '../src/assets/nlw-logo.svg'
 
 const StyledStripes = styled(Stripes)
+const discovery = {
+  authorizationEndpoint: 'https://github.com/login/oauth/authorize',
+  tokenEndpoint: 'https://github.com/login/oauth/access_token',
+  revocationEndpoint:
+    'https://github.com/settings/connections/applications/c2f4e1233d83117bb17a',
+}
 
 export default function App() {
+  const router = useRouter()
   const [hasLoadedFonts] = useFonts({
     Roboto_400Regular,
     Roboto_700Bold,
     BaiJamjuree_700Bold,
   })
+
+  // last parameter name changed (signInWithGithub) for better context
+  const [, response, signInWithGithub] = useAuthRequest(
+    {
+      clientId: 'c2f4e1233d83117bb17a',
+      scopes: ['identity'],
+      redirectUri: makeRedirectUri({
+        scheme: 'timecapsule',
+      }),
+    },
+    discovery,
+  )
+
+  async function handleGithubOAuthCode(code: String): Promise<void> {
+    try {
+      const res = await api.post('/register', {
+        code,
+      })
+      const { token } = res.data
+      await SecureStore.setItemAsync('NWLtoken', token)
+      router.push('/memories')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    // console.log(
+    //   makeRedirectUri({
+    //     scheme: 'timecapsule',
+    //   }),
+    // )
+
+    if (response?.type === 'success') {
+      const { code } = response.params
+      handleGithubOAuthCode(code)
+    }
+  }, [response])
 
   if (!hasLoadedFonts) {
     return null
@@ -45,6 +95,7 @@ export default function App() {
         <TouchableOpacity
           activeOpacity={0.7}
           className="rounded-full bg-green-500 px-5 py-2"
+          onPress={() => signInWithGithub()}
         >
           <Text className="font-alt text-sm uppercase text-black">
             Register a memory
