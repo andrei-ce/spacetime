@@ -1,23 +1,13 @@
-import { StatusBar } from 'expo-status-bar'
-import { ImageBackground, View, Text, TouchableOpacity } from 'react-native'
-import {
-  useFonts,
-  Roboto_400Regular,
-  Roboto_700Bold,
-} from '@expo-google-fonts/roboto'
-import { BaiJamjuree_700Bold } from '@expo-google-fonts/bai-jamjuree'
+import { View, Text, TouchableOpacity } from 'react-native'
+
 import * as SecureStore from 'expo-secure-store'
-import { styled } from 'nativewind'
 import React, { useEffect } from 'react'
 import { makeRedirectUri, useAuthRequest } from 'expo-auth-session'
 import { useRouter } from 'expo-router'
 
 import { api } from '../src/lib/api'
-import blurBg from '../src/assets/bg-blug.png'
-import Stripes from '../src/assets/stripes.svg'
 import NlwLogo from '../src/assets/nlw-logo.svg'
 
-const StyledStripes = styled(Stripes)
 const discovery = {
   authorizationEndpoint: 'https://github.com/login/oauth/authorize',
   tokenEndpoint: 'https://github.com/login/oauth/access_token',
@@ -27,11 +17,6 @@ const discovery = {
 
 export default function App() {
   const router = useRouter()
-  const [hasLoadedFonts] = useFonts({
-    Roboto_400Regular,
-    Roboto_700Bold,
-    BaiJamjuree_700Bold,
-  })
 
   // last parameter name changed (signInWithGithub) for better context
   const [, response, signInWithGithub] = useAuthRequest(
@@ -51,7 +36,7 @@ export default function App() {
         code,
       })
       const { token } = res.data
-      await SecureStore.setItemAsync('NWLtoken', token)
+      await SecureStore.setItemAsync('NLWtoken', token)
       router.push('/memories')
     } catch (error) {
       console.log(error)
@@ -71,18 +56,8 @@ export default function App() {
     }
   }, [response])
 
-  if (!hasLoadedFonts) {
-    return null
-  }
-
   return (
-    <ImageBackground
-      source={blurBg}
-      imageStyle={{ position: 'absolute', left: '-100%' }}
-      className="relative flex-1 bg-gray-900 p-8"
-    >
-      <StyledStripes className="absolute left-2" />
-
+    <View className=" flex-1 p-8">
       <View className="flex-1 items-center justify-center gap-6">
         <NlwLogo />
         <Text className="font-title text-2xl leading-tight text-gray-50">
@@ -105,7 +80,6 @@ export default function App() {
       <Text className="text-center font-body text-sm leading-relaxed text-gray-200">
         Made with 💜 during NLW from Rocketseat
       </Text>
-      <StatusBar style="light" translucent />
-    </ImageBackground>
+    </View>
   )
 }
