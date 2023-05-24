@@ -10,7 +10,6 @@ export async function authRoutes(app: FastifyInstance) {
       code: z.string(),
     })
     const { code } = bodySchema.parse(req.body)
-    console.log('hi')
     // use code generated on FE + BE keys to get access token from github
     const accessTokenResponse = await axios.post(
       'https://github.com/login/oauth/access_token',
