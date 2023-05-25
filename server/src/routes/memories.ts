@@ -5,7 +5,7 @@ import { z } from 'zod'
 export async function memoriesRoutes(app: FastifyInstance) {
   // fastify.io/docs/latest/Reference/Lifecycle/ explains the http req lifecycle
   // handlers are the functions defined in routes defined below
-  // so we want to add logic before every handler func
+  // so we want to add logic before every handler func. Sort of a Middleware for this file only
   app.addHook('preHandler', async (req, res) => {
     await req.jwtVerify()
   })
