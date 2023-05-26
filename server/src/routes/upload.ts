@@ -27,6 +27,7 @@ export async function uploadRoutes(app: FastifyInstance) {
     } else if (fileSizeInBytes) {
       const contentLength = fileSizeInBytes
       const fileSizeLimit = FILE_SIZE_LIMIT_IN_MB * 1024 * 1024
+      console.log(contentLength, fileSizeLimit)
       if (contentLength > fileSizeLimit) {
         res.code(413).send({
           error:
@@ -37,6 +38,7 @@ export async function uploadRoutes(app: FastifyInstance) {
   })
 
   app.post('/upload', async (req, res) => {
+    console.log('hey there')
     const data = await req.file()
 
     if (!data) {

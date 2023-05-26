@@ -31,7 +31,7 @@ app.register(require('@fastify/static'), {
 })
 
 app.register(cors, {
-  origin: true, // all FE urls can access the BE
+  origin: false, // all FE urls can access the BE
   // origin:['http://localhost:3000', 'http://mydomain...']
 })
 app.register(jwt, { secret: 'placeholder' })
