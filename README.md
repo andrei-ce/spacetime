@@ -26,9 +26,10 @@ To run this project locally, you will need to do the following steps in the proj
 2. Add environment variables to a .env file as suggested in the `.env.example` file  
 2.1 Create a github oauth app *for web only* at [https://github.com/settings/developers](https://github.com/settings/developers) and store both `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET`  
 2.2 Insert both values in a `server/.env` file (comment the mobile values if you did that first)  
-2.3 Add the `GITHUB_CLIENT_ID` string to `web-app/.env.local`, with a prefix, like so `NEXT_PUBLIC_GITHUB_CLIENT_ID`, as exemplified in `.env.local.example`
-3. Run `npm run dev` both on the server and web-app root direrctory  
-4. Access `http://localhost:3000/` on your browser
+2.3 Add the `GITHUB_CLIENT_ID` string to `web-app/.env.local`, with a prefix, like so `NEXT_PUBLIC_GITHUB_CLIENT_ID`, as exemplified in `.env.local.example`  
+3. Run `npx prisma migrate dev` on the server root directory
+4. Run `npm run dev` both on the server and web-app root directory  
+5. Access `http://localhost:3000/` on your browser
 
 ### Running on mobile
 
@@ -39,6 +40,7 @@ To run this project locally, you will need to do the following steps in the proj
 2.2 Insert both values in a `server/.env` file (comment the web values if you did that first)  
 2.3 Add the `GITHUB_CLIENT_ID` string to cofiguration object of the useAuthRequest function, under the `clientId` key in `app/index.tsx` file
 3. Add your ip address to `lib/api.ts`
-4. Run `npm run dev` on the server root direrctory 
-5. Run `npm run start` on the mobile-app root direrctory 
-6. Access the Expo app on your mobile & scan the QR code displayed on the terminal. Make sure you are in the same wi-fi network as your local machine.
+4. Run `npx prisma migrate dev` on the server root directory
+5. Run `npm run dev` on the server root direrctory 
+6. Run `npm run start` on the mobile-app root direrctory 
+7. Access the Expo app on your mobile & scan the QR code displayed on the terminal. Make sure you are in the same wi-fi network as your local machine.
