@@ -5,7 +5,8 @@ This is a Fullstack application using Typescript in NodeJS for the BE, NextJS fo
 ### To-do:
 [ ] Connect to an external storage system  
 [ ] Add better error handling  
-[ ] Configure backend so it works simultaneously with web and mobile app
+[ ] Better configuration on backend to work simultaneously with web and mobile app
+[ ] Better configuration on mobile app so it does not depend on your specific IP address
 
 <br />
 <img src="https://i.ibb.co/4PjT4MC/logged-out.jpg" alt="Login page web" width="420" height="240"/>
