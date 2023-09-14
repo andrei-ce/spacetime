@@ -3,15 +3,15 @@
 This is a Fullstack application using Typescript in NodeJS for the BE, NextJS for FE and React Native for mobile. It let's you login through OAuth using your github account and upload pictures and videos to a time-line based UI.
 
 ### To-do:
-[ ] Connect to an external storage system
-[ ] Add better error handling
+[ ] Connect to an external storage system  
+[ ] Add better error handling  
 [ ] Configure backend so it works simultaneously with web and mobile app
 
 <br />
 <img src="https://i.ibb.co/4PjT4MC/logged-out.jpg" alt="Login page web" width="350" height="200"/>
 <img src="https://i.ibb.co/ry5WGGJ/timeline.jpg" alt="Timeline page web" width="350" height="200"/>
 <img src="https://i.ibb.co/dt8zp4x/new-memory.jpg" alt="Upload memory page web" width="350" height="200"/>
-<img src="https://i.ibb.co/KbZPWW1/Whats-App-Image-2023-09-14-at-11-36-47.jpg" alt="Upload memory page mobile" width="350" height="200"/>
+<img src="https://i.ibb.co/KbZPWW1/Whats-App-Image-2023-09-14-at-11-36-47.jpg" alt="Upload memory page mobile" width="75" height="130"/>
 <br />
 
 ## Running locally
