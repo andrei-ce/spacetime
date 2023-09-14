@@ -2,7 +2,11 @@ import Link from 'next/link'
 import nlwLogo from '../assets/nlw-logo.svg'
 import Image from 'next/image'
 
-export function Hero() {
+interface HeroProps {
+  isAuth: boolean
+}
+
+export function Hero({ isAuth }: HeroProps) {
   return (
     <div className="space-y-5">
       <Image src={nlwLogo} alt="NLW Spacetime" />
@@ -15,12 +19,21 @@ export function Hero() {
           want) with the world!
         </p>
       </div>
-      <Link
-        className="inline-block rounded-full bg-green-500 px-5 py-3 font-alt text-sm uppercase leading-none text-black hover:animate-ping-slow hover:bg-green-600"
-        href="/memories/new"
-      >
-        Register a memory{' '}
-      </Link>
+      {isAuth ? (
+        <Link
+          className="inline-block rounded-full bg-green-500 px-5 py-3 font-alt text-sm uppercase leading-none text-black hover:animate-ping-slow hover:bg-green-600"
+          href="/memories/new"
+        >
+          Register a memory{' '}
+        </Link>
+      ) : (
+        <Link
+          className="inline-block rounded-full bg-blue-500 px-5 py-3 font-alt text-sm uppercase leading-none text-black  hover:bg-blue-600"
+          href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}`}
+        >
+          Create an account
+        </Link>
+      )}
     </div>
   )
 }

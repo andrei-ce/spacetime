@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { api } from '@/lib/api'
 
 export async function GET(req: NextRequest, res: NextResponse) {
+  console.log('<><><><><><><><><>')
   const { searchParams } = new URL(req.url)
   const code = searchParams.get('code')
 
@@ -10,6 +11,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
   const registerResponse = await api.post('/register', { code })
 
   const { token } = registerResponse.data
+
+  console.log(token)
 
   const redirectURL = redirectTo ?? new URL('/', req.url)
 

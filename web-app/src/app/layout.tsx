@@ -39,7 +39,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             {/* STRIPES ELEMENT */}
             <div className="absolute bottom-0 right-2 top-0 w-2 bg-stripes " />
             {isAuth ? <Profile /> : <SignIn />}
-            <Hero />
+            <Hero isAuth={isAuth} />
             <Copyright />
           </div>
           {/* RIGHT */}

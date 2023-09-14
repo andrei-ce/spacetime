@@ -40,7 +40,7 @@ export async function uploadRoutes(app: FastifyInstance) {
   app.post('/upload', async (req, res) => {
     console.log('hey there')
     const data = await req.file()
-
+    console.log(data)
     if (!data) {
       return res.status(400).send()
     }

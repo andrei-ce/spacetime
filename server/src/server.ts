@@ -15,7 +15,7 @@ const app = fastify({ logger: true })
 const FILE_SIZE_LIMIT_IN_MB = 5 // export to .env variable
 
 app.get('/ping', async (req, res) => {
-  return { pong: 'it worked!' }
+  return { pong: true }
 })
 
 app.register(multipart, {
@@ -31,8 +31,11 @@ app.register(require('@fastify/static'), {
 })
 
 app.register(cors, {
-  origin: false, // all FE urls can access the BE
-  // origin:['http://localhost:3000', 'http://mydomain...']
+  // origin: true, // all FE urls can access the BE
+  origin: [
+    'http://localhost:3000',
+    //  'http://mydomain...'
+  ],
 })
 app.register(jwt, { secret: 'placeholder' })
 
@@ -44,7 +47,10 @@ app.register(uploadRoutes)
 const start = async () => {
   const PORT = 3333 // export to .env variable
   try {
-    await app.listen({ port: PORT, host: '0.0.0.0' })
+    await app.listen({
+      port: PORT,
+      // host: '0.0.0.0', // this needs to be commented to use web-app, and uncommented to use mobile-app
+    })
     console.log(`🚀 HTTP server live on: http://localhost:${PORT}`)
   } catch (err) {
     app.log.error(err)

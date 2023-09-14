@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['avatars.githubusercontent.com', '192.168.0.2'],
+    domains: ['avatars.githubusercontent.com', 'localhost', '192.168.0.2'],
     // remotePatterns: [
     //   {
     //     protocol: 'http',
