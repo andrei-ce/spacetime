@@ -12,6 +12,7 @@ This is a Fullstack application using Typescript in NodeJS for the BE, NextJS fo
 <img src="https://i.ibb.co/4PjT4MC/logged-out.jpg" alt="Login page web" width="420" height="240"/>
 <img src="https://i.ibb.co/ry5WGGJ/timeline.jpg" alt="Timeline page web" width="420" height="240"/>
 <img src="https://i.ibb.co/dt8zp4x/new-memory.jpg" alt="Upload memory page web" width="420" height="240"/>
+<br />
 <img src="https://i.ibb.co/KbZPWW1/Whats-App-Image-2023-09-14-at-11-36-47.jpg" alt="Upload memory page mobile" width="150" height="260"/>
 <br />
 
