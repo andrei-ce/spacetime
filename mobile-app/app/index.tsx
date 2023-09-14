@@ -21,7 +21,7 @@ export default function App() {
   // last parameter name changed (signInWithGithub) for better context
   const [, response, signInWithGithub] = useAuthRequest(
     {
-      clientId: 'c2f4e1233d83117bb17a',
+      clientId: 'GITHUB_CLIENT_ID_STRING_MOBILE',
       scopes: ['identity'],
       redirectUri: makeRedirectUri({
         scheme: 'timecapsule',
